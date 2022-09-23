@@ -85,25 +85,143 @@ let ride = {
     speed: speed ?? 30,
 };
 
-let phone = <HTMLInputElement>document.getElementById("phone");
+class Account {
+    constructor(
+        public readonly id: number,
+        public owner: string,
+        private _balance: number,
+    ) {}
 
-phone.value;
-
-function render(document: unknown) {
-    if (typeof document === "string") {
-        document.toUpperCase();
+    deposit(amount: number): void {
+        if (amount <= 0) {
+            throw new Error("Invalid amount");
+        }
+        this._balance += amount;
+    }
+    get balance(): number {
+        return this._balance;
+    }
+    set balance(value: number) {
+        if (value < 0) {
+            throw new Error("Invalid Value");
+        }
+        this._balance = value;
     }
 }
 
-function processEvents(): never {
-    while (true) {}
+let account = new Account(1, "darcy", 30000);
+account.deposit(10000);
+console.log(account.balance);
+
+class SeatAssignment {
+    [seatNumber: string]: string;
 }
 
-type users = {
-    name: string;
-    age: number;
-    occupation?: string;
-};
+let seats = new SeatAssignment();
+seats.A1 = "Mosh";
+seats.A2 = "John";
 
-processEvents();
-console.log("hello world");
+class Ride {
+    activeRides: number = 0;
+
+    start() {
+        this.activeRides++;
+    }
+    stop() {
+        this.activeRides--;
+    }
+}
+
+class Person {
+    constructor(public firstName: string, public lastName: string) {}
+
+    get fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+
+    walk() {
+        console.log("walking");
+    }
+}
+
+class Student extends Person {
+    constructor(public studentId: number, firstName: string, lastName: string) {
+        super(firstName, lastName);
+    }
+
+    takeTest() {
+        console.log("taking a test");
+    }
+}
+
+let student = new Student(1, "darcy", "Henschke");
+
+class Teacher extends Person {
+    override get fullName() {
+        return "Professor " + super.fullName;
+    }
+}
+
+let teacher = new Teacher("john", "SMith");
+console.log(teacher.fullName);
+console.log(student.fullName);
+
+function printName(people: Person[]) {
+    for (let person of people) {
+        console.log(person.fullName);
+    }
+}
+
+printName([new Student(1, "John", "smith"), new Teacher("John", "Smith")]);
+
+abstract class Shape {
+    constructor(public color: string) {}
+
+    abstract render(): void;
+}
+
+class Circle extends Shape {
+    constructor(public radius: number, color: string) {
+        super(color);
+    }
+    override render(): void {
+        console.log("rendering a circle");
+    }
+}
+
+let circle = new Circle(10, "blue");
+circle.render();
+
+interface Calender {
+    name: string;
+    addEvent(): void;
+    removeEvent(): void;
+}
+
+class Logger {
+    constructor(public name: string) {}
+
+    messages(message: string) {
+        this.name += message;
+    }
+}
+
+class Person2 {
+    constructor(public firstName: string, public lastName: string) {}
+
+    get fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+
+class Employee2 extends Person2 {
+    constructor(public salary: number, firstName: string, lastName: string) {
+        super(firstName, lastName);
+    }
+}
+
+interface Emplyee3 {
+    name: string;
+    salary: number;
+    address: { street: string; city: string; zipCode: number };
+}
