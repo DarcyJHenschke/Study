@@ -225,3 +225,5 @@ interface Emplyee3 {
     salary: number;
     address: { street: string; city: string; zipCode: number };
 }
+
+// test
