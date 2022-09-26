@@ -1,4 +1,10 @@
 "use strict";
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
 var _a;
 let mySize = 2;
 console.log(mySize);
@@ -141,4 +147,119 @@ class Circle extends Shape {
 }
 let circle = new Circle(10, "blue");
 circle.render();
-//# sourceMappingURL=index.js.map
+class Logger {
+    constructor(name) {
+        this.name = name;
+    }
+    messages(message) {
+        this.name += message;
+    }
+}
+class Person2 {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get fullName() {
+        return this.firstName + " " + this.lastName;
+    }
+}
+class Employee2 extends Person2 {
+    constructor(salary, firstName, lastName) {
+        super(firstName, lastName);
+        this.salary = salary;
+    }
+}
+class KeyValuePair {
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+let pair = new KeyValuePair("1", "a");
+pair.key;
+function wrapInArray(value) {
+    return [value];
+}
+let numbers = wrapInArray("1");
+class Store {
+    constructor() {
+        this._objects = [];
+    }
+    add(obj) {
+        this._objects.push(obj);
+    }
+}
+class CompressibleStore extends Store {
+    compress() { }
+}
+let store = new CompressibleStore();
+let product = {
+    name: "a",
+    price: 1,
+};
+function echos(args) {
+    return args;
+}
+function printNames(obj) {
+    console.log(obj.name);
+}
+function Component(value) {
+    return (constructor) => {
+        console.log("component decorator called");
+        constructor.prototype.options = value;
+        constructor.prototype.uniqueId = Date.now();
+        constructor.prototype.insertInDOM = () => {
+            console.log("inserting in DOM");
+        };
+    };
+}
+function Pipe(constructor) {
+    console.log("pipe decorator called");
+    constructor.prototype.pipe = true;
+}
+let ProfileComponent = class ProfileComponent {
+};
+ProfileComponent = __decorate([
+    Component({ selector: "#my-profile" }),
+    Pipe
+], ProfileComponent);
+function Log(target, methodName, descriptor) {
+    const original = descriptor.value;
+    descriptor.value = function (...args) {
+        console.log("Before");
+        original.call(this, ...args);
+        console.log("After");
+    };
+}
+class Persons {
+    say(message) {
+        console.log(`Person says ${message}`);
+    }
+}
+__decorate([
+    Log
+], Persons.prototype, "say", null);
+let persons = new Persons();
+persons.say("hello");
+function Capitalize(target, method, descriptor) {
+    const original = descriptor.get;
+    descriptor.get = function () {
+        const result = original === null || original === void 0 ? void 0 : original.call(this);
+        return typeof result === "string" ? result.toUpperCase() : result;
+    };
+}
+class Persons3 {
+    constructor(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+__decorate([
+    Capitalize
+], Persons3.prototype, "fullName", null);
+let person3 = new Persons3("darcy", "Henschke");
+console.log(person3.fullName);

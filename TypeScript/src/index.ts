@@ -259,3 +259,88 @@ class CompressibleStore<T> extends Store<T> {
 }
 
 let store = new CompressibleStore<Product>();
+
+type ReadOnly<T> = {
+    readonly [Property in keyof T]: T[Property];
+};
+
+let product: ReadOnly<Product> = {
+    name: "a",
+    price: 1,
+};
+
+function echos<T>(args: T): T {
+    return args;
+}
+
+function printNames<T extends { name: string }>(obj: T) {
+    console.log(obj.name);
+}
+
+type ComponentOptions = {
+    selector: string;
+};
+
+function Component(value: ComponentOptions) {
+    return (constructor: Function) => {
+        console.log("component decorator called");
+        constructor.prototype.options = value;
+        constructor.prototype.uniqueId = Date.now();
+        constructor.prototype.insertInDOM = () => {
+            console.log("inserting in DOM");
+        };
+    };
+}
+
+function Pipe(constructor: Function) {
+    console.log("pipe decorator called");
+    constructor.prototype.pipe = true;
+}
+
+@Component({ selector: "#my-profile" })
+@Pipe
+class ProfileComponent {}
+
+function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.value as Function;
+    descriptor.value = function (...args: any) {
+        console.log("Before");
+        original.call(this, ...args);
+        console.log("After");
+    };
+}
+
+class Persons {
+    @Log
+    say(message: string) {
+        console.log(`Person says ${message}`);
+    }
+}
+
+let persons = new Persons();
+persons.say("hello");
+
+function Capitalize(
+    target: any,
+    method: string,
+    descriptor: PropertyDescriptor,
+) {
+    const original = descriptor.get;
+    descriptor.get = function () {
+        const result = original?.call(this);
+
+        return typeof result === "string" ? result.toUpperCase() : result;
+    };
+}
+
+class Persons3 {
+    constructor(public firstName: string, public lastName: string) {}
+
+    @Capitalize
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`;
+    }
+}
+
+let person3 = new Persons3("darcy", "Henschke");
+console.log(person3.fullName);
