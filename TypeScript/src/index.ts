@@ -344,3 +344,22 @@ class Persons3 {
 
 let person3 = new Persons3("darcy", "Henschke");
 console.log(person3.fullName);
+
+function MinLength(length: number) {
+    return (target: any, propertyName: string) => {
+        let value: string;
+        const descriptor: PropertyDescriptor = {
+            get() {
+                return value;
+            },
+            set(newValue: string) {
+                if (newValue.length < length) {
+                    throw new Error(
+                        `${propertyName} should be at least ${length} characters long`,
+                    );
+                }
+                value = newValue;
+            },
+        };
+    };
+}
