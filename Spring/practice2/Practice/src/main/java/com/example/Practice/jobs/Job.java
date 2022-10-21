@@ -4,14 +4,18 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.example.Practice.temps.Temp;
 
 
 @Entity
-
 public class Job {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,6 +30,11 @@ public class Job {
 	@Column
 	public String endDate;
 	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="TEMP_ID")
+	private Temp temp;
+	
 	public Job() {
 		
 	}
@@ -34,6 +43,13 @@ public class Job {
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+
+	public Job(String name, String startDate, String endDate, Temp temp) {
+		this.name = name;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.temp = temp;
 	}
 
 	public Long getId() {
@@ -67,6 +83,18 @@ public class Job {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	public Temp getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Temp temp) {
+		this.temp = temp;
+	}
+
+	
+
+	
 	
 	
 

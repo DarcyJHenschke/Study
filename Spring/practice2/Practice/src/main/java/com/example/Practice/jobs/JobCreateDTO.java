@@ -7,6 +7,8 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.Practice.temps.Temp;
+
 public class JobCreateDTO {
 	
 	
@@ -18,11 +20,14 @@ public class JobCreateDTO {
 	
 	@NotNull
 	String endDate;
+	
+	Temp temp;
 
-	public JobCreateDTO(@NotBlank String name, @NotNull String startDate, @NotNull String endDate) {
+	public JobCreateDTO(@NotBlank String name, @NotNull String startDate, @NotNull String endDate, Temp temp) {
 		this.name = name;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.temp = temp;
 	}
 
 	public String getName() {
@@ -48,6 +53,18 @@ public class JobCreateDTO {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
+
+	public Temp getTemp() {
+		return temp;
+	}
+
+	public void setTemp(Temp temp) {
+		this.temp = temp;
+	}
+	
+	
+
+	
 
 	
 	
