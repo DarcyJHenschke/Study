@@ -2,11 +2,13 @@ package com.example.Practice.temps;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.example.Practice.jobs.Job;
@@ -25,7 +27,8 @@ public class Temp {
 	@Column
 	String lastName;
 	
-	@OneToMany(mappedBy = "temp")
+	@OneToMany(targetEntity = Job.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "job_fk", referencedColumnName = "id")
 	private List<Job> jobs;
 	
 	public Temp() {

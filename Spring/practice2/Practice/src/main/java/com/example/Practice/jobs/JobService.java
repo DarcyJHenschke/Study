@@ -18,16 +18,16 @@ public class JobService {
 	@Autowired
 	private JobsRepository jobRepo;
 	
-//	@Autowired
-//	private TempsRepository tempRepo;
+	@Autowired
+	private TempsRepository tempRepo;
 	
-//	public Job enrollTempToJob(Long jobId, Long tempId) {
-//		Job job = jobRepo.findById(jobId).get();
-//		Temp temp = tempRepo.findById(tempId).get();
-//		job.setTemp(temp);
-//		return jobRepo.save(job);
-//		
-//	}
+	public Job enrollTempToJob(Long jobId, Long tempId) {
+		Job job = jobRepo.findById(jobId).get();
+		Temp temp = tempRepo.findById(tempId).get();
+		job.setTemp(temp);
+		return jobRepo.save(job);
+		
+	}
 	
 	public Job createJob(JobCreateDTO data) {
 		Job input = new Job(data.getName(), data.getStartDate(), data.getEndDate());

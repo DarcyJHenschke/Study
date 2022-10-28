@@ -68,14 +68,14 @@ public class JobController {
 	}
 	
 	
-//	@PutMapping("/{jobId}/temp/{tempId}")
-//	public ResponseEntity<Job> enrollJobtoTemp(
-//			@PathVariable Long jobId, 
-//			@PathVariable Long tempId) {
-//		Job updatedJob = service.enrollTempToJob(jobId, tempId);
-//		return new ResponseEntity<>(updatedJob, HttpStatus.OK);
-//		
-//	}
+	@PutMapping("/{jobId}/temp/{tempId}")
+	public ResponseEntity<Job> enrollJobtoTemp(
+			@PathVariable Long jobId, 
+			@PathVariable Long tempId) {
+		Job updatedJob = service.enrollTempToJob(jobId, tempId);
+		return new ResponseEntity<>(updatedJob, HttpStatus.OK);
+		
+	}
 
 	
 	

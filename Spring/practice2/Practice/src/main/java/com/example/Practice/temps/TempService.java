@@ -25,8 +25,11 @@ public class TempService {
 	public Temp enrollJobToTemp(Long tempId, Long jobId) {
 		Temp temp = tempRepo.findById(tempId).get();
 		Job job = jobRepo.findById(jobId).get();
+		
 		temp.setJobs(job);
-		return tempRepo.save(temp);
+		System.out.println(temp);
+		tempRepo.save(temp);
+		return temp;
 		
 	}
 	
