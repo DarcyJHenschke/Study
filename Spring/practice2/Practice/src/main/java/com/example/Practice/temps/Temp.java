@@ -27,8 +27,7 @@ public class Temp {
 	@Column
 	String lastName;
 	
-	@OneToMany(targetEntity = Job.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "job_fk", referencedColumnName = "id")
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Job> jobs;
 	
 	public Temp() {

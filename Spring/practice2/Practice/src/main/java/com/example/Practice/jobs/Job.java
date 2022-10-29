@@ -2,6 +2,7 @@ package com.example.Practice.jobs;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,8 +32,7 @@ public class Job {
 	public String endDate;
 	
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="TEMP_ID")
+	@ManyToOne
 	private Temp temp;
 	
 	public Job() {
