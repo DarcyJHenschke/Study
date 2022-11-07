@@ -1,0 +1,17 @@
+.Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10vh;
+    background-color: lightgrey;
+    border-radius: 10px;
+    width: 100%;
+    padding: 2rem;
+}
+
+.SigninWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 10vh;
+}

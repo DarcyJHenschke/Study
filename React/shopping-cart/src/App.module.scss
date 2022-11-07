@@ -1,22 +1,21 @@
 .App {
     display: flex;
+    flex-direction: column;
 }
 
 .MainWrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
-    width: 66vw;
-    height: 100vh;
-    border: black solid 2px;
+    width: 100vw;
+    height: 10vh;
 }
 
 .BasketWrapper {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    width: 33vw;
-    height: 100vh;
+    width: 100vw;
+    height: 90vh;
 }
