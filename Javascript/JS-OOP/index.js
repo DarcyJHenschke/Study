@@ -5,65 +5,38 @@
 // stop
 
 function Stopwatch() {
-    let startTime = 0;
-    let endTime = 0;
-    let running = false;
-    let duration = 0;
-
-    this.start = function () {
-        if (running) {
-            throw new Error("stopwatch has already started");
-        }
-        !running;
-        startTime = new Date();
-    };
-
-    this.stop = function () {
-        if (!running) {
-            throw new Error("stopwatch is already stopped");
-        }
-
-        !running;
-        endTime = new Date();
-        const seconds = (endTime.getTime() - startTime.getTime()) / 1000;
-        duration += seconds;
-    };
-    this.reset = function () {
-        startTime = null;
-        endTime = null;
-        running = false;
-        duration = 0;
-    };
+    this.startTime = 0;
+    this.endTime = 0;
+    this.running = false;
+    this.duration = 0;
 
     Object.defineProperty(this, "duration", {
         get: function () {
-            return duration;
+            return this.duration;
         },
     });
 }
 
-function Circle(radius) {
-    this.radius = radius;
-    let defaultLocation = { x: 0, y: 0 };
-    this.getDefaultLocation = function () {
-        return defaultLocation;
-    };
-    this.draw = function () {
-        computeOptimumLocation(0.1);
-        console.log("draw");
-    };
+Stopwatch.prototype.start = function () {
+    if (this.running) {
+        throw new Error("stopwatch has already started");
+    }
+    !this.running;
+    this.startTime = new Date().getTime();
+};
+Stopwatch.prototype.stop = function () {
+    if (!this.running) {
+        throw new Error("stopwatch is already stopped");
+    }
 
-    Object.defineProperty(this, "defaultLocation", {
-        get: function () {
-            return defaultLocation;
-        },
-        set: function (value) {
-            if (!value.x || !value.y) {
-                throw new Error("invalid location");
-            }
-            defaultLocation = value;
-        },
-    });
-}
-
-const circle = new Circle(10);
+    !this.running;
+    this.endTime = new Date();
+    const seconds = (this.endTime - this.startTime) / 1000;
+    duration += seconds;
+};
+Stopwatch.prototype.reset = function () {
+    this.startTime = null;
+    this.endTime = null;
+    this.running = false;
+    this.duration = 0;
+};
