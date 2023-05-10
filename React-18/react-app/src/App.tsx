@@ -1,11 +1,9 @@
-import React from "react";
-import ListGroup from "./components/ListGroup";
-import Message from "./Message";
+import Like from "./components/Like";
 
 function App() {
     return (
         <div>
-            <ListGroup />
+            <Like />
         </div>
     );
 }
