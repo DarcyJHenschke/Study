@@ -160,3 +160,126 @@ function Circle(radius) {
 
 const circle = new Circle(1);
 circle.draw();
+
+const address = {
+    street: "balcombe",
+    city: "melbourne",
+    zip: "3193",
+};
+
+function showAddress(obj) {
+    for (let key in obj) {
+        console.log(key, obj[key]);
+    }
+}
+
+showAddress(address);
+
+function createAddress(street, city, zip) {
+    return {
+        street: street,
+        city: city,
+        zip,
+        zip,
+    };
+}
+
+function Address(street, zip, city) {
+    this.street = street;
+    this.city = city;
+    this.zip = zip;
+}
+
+const numbers = [3, 4];
+
+function arrayFromRange(min, max) {
+    const arr = [];
+    for (let i = min; i <= max; i++) {
+        arr.push(i);
+    }
+    console.log(arr);
+}
+
+arrayFromRange(-10, -4);
+
+function includes(array, searchElement) {
+    return array.filter((x) => x !== searchElement);
+}
+
+console.log(includes([1, 2, 3], 1));
+
+function move(array, index, offset) {
+    // if (index + offset > array.length - 1) {
+    //     console.error("invalid offset");
+    // }
+
+    const copy = [...array];
+    copy.splice(index, 1);
+    copy[index + offset] = array[index];
+    console.log(copy);
+    return copy;
+}
+
+console.log(move([1, 2, 3, 4, 5, 6], 2, 2));
+
+function countOccurences(array, searchElement) {
+    return array.reduce(
+        (accum, current) =>
+            current === searchElement ? (accum += 1) : (accum += 0),
+        0,
+    );
+}
+
+console.log(countOccurences([1, 2, 3, 4, 3, 3, 4, 5, 3], 3));
+
+function getMax(array) {
+    return array.reduce((accum, current) => {
+        if (current > accum) return current;
+        return accum;
+    });
+}
+
+console.log(getMax([1, 4, 1000, 200, 80, 3]));
+
+const movies = [
+    { title: "a", year: 2018, rating: 4.5 },
+    { title: "b", year: 2018, rating: 4.7 },
+    { title: "c", year: 2018, rating: 3 },
+    { title: "d", year: 2017, rating: 4.5 },
+];
+
+function filteredMovies(array) {
+    return array
+        .filter((x) => x.year === 2018)
+        .filter((x) => x.rating > 4)
+        .sort((a, b) => b.rating - a.rating)
+        .map((x) => console.log(x.title));
+}
+
+filteredMovies(movies);
+
+const obj3 = {
+    a: 1,
+    b: 2,
+    c: 3,
+    d: 4,
+};
+
+const { d, ...obj4 } = obj3;
+
+function sum() {
+    let total = 0;
+    for (let value of arguments) {
+        total += value;
+    }
+    return total;
+}
+
+console.log(sum(1, 2, 3, 4, 5, 65));
+
+const circle3 = {
+    radius: 2,
+    get area() {
+        return Math.PI * this.radius * this.radius;
+    },
+};
